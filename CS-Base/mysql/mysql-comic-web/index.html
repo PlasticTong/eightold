@@ -1,0 +1,317 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>MySQL 速通漫画版</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <header class="hero" id="top">
+      <nav class="nav">
+        <a href="#map">全景地图</a>
+        <a href="#select">SELECT</a>
+        <a href="#index">索引</a>
+        <a href="#logs">日志</a>
+        <a href="#mvcc">MVCC</a>
+        <a href="#locks">锁</a>
+      </nav>
+
+      <div class="hero-grid">
+        <div>
+          <p class="eyebrow">MySQL Comic Guide</p>
+          <h1>一条 SQL 的奇妙冒险</h1>
+          <p class="lead">
+            用漫画分镜、图解和速查表，把 MySQL 的查询、索引、Buffer Pool、事务、锁、日志串成一张脑图。
+          </p>
+          <div class="hero-actions">
+            <a class="button primary" href="#map">开始速通</a>
+            <a class="button ghost" href="../mysql_quick_comic.md">查看 Markdown 版</a>
+          </div>
+        </div>
+
+        <div class="comic-cover" aria-label="MySQL 漫画封面">
+          <div class="speech">“别慌，我先问问优化器！”</div>
+          <div class="mascot">
+            <span class="eye left"></span>
+            <span class="eye right"></span>
+            <span class="mouth"></span>
+          </div>
+          <div class="query-card">
+            <code>select * from user where id = 10;</code>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="section" id="map">
+        <div class="section-title">
+          <p class="eyebrow">01 / Big Picture</p>
+          <h2>先把全景图贴墙上</h2>
+          <p>Server 层负责听懂 SQL、选计划；InnoDB 负责存数据、走索引、控事务、加锁、写日志。</p>
+        </div>
+
+        <div class="flow-map">
+          <div class="node client">🧑‍💻<strong>客户端</strong><span>发 SQL</span></div>
+          <div class="arrow">→</div>
+          <div class="node server">🚪<strong>Server 层</strong><span>连接 / 解析 / 优化 / 执行</span></div>
+          <div class="arrow">→</div>
+          <div class="node engine">📚<strong>InnoDB</strong><span>索引 / 行 / 事务 / 锁</span></div>
+          <div class="branch">
+            <div class="node small">🧽 Buffer Pool</div>
+            <div class="node small">📝 undo log</div>
+            <div class="node small">🔥 redo log</div>
+            <div class="node small">📦 binlog</div>
+            <div class="node small">💽 磁盘</div>
+          </div>
+        </div>
+
+        <div class="takeaway">
+          <strong>记住一句：</strong>MySQL 慢不慢，通常绕不开三个问题：索引有没有走好？事务锁有没有等？内存和日志有没有拖后腿？
+        </div>
+      </section>
+
+      <section class="section split" id="select">
+        <div class="section-title">
+          <p class="eyebrow">02 / Query Flow</p>
+          <h2>SELECT 的通关流程</h2>
+        </div>
+
+        <div class="comic-strip">
+          <article class="panel">
+            <span class="badge">1</span>
+            <h3>连接器</h3>
+            <p>“你是谁？权限够不够？”</p>
+          </article>
+          <article class="panel">
+            <span class="badge">2</span>
+            <h3>解析器</h3>
+            <p>“这句 SQL 语法像不像人话？”</p>
+          </article>
+          <article class="panel">
+            <span class="badge">3</span>
+            <h3>优化器</h3>
+            <p>“走哪个索引，成本最低？”</p>
+          </article>
+          <article class="panel">
+            <span class="badge">4</span>
+            <h3>执行器</h3>
+            <p>“InnoDB，帮我把数据拿回来。”</p>
+          </article>
+        </div>
+
+        <div class="analysis-card">
+          <h3>分析</h3>
+          <ul>
+            <li>解析器只管 SQL 是否合法。</li>
+            <li>优化器决定执行计划，比如走主键索引还是普通索引。</li>
+            <li>执行器调用存储引擎接口拿数据。</li>
+            <li>MySQL 8.0 已移除查询缓存，别再把性能幻想寄托在它身上。</li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="section" id="storage">
+        <div class="section-title">
+          <p class="eyebrow">03 / Storage</p>
+          <h2>数据不是“一行一行”躺在磁盘上</h2>
+          <p>InnoDB 的基本读写单位是页，默认 16KB。Buffer Pool 缓存的核心也是页。</p>
+        </div>
+
+        <div class="stack-diagram">
+          <div>表 Table</div>
+          <div>表空间 Tablespace</div>
+          <div>段 Segment</div>
+          <div>区 Extent</div>
+          <div>页 Page <small>默认 16KB</small></div>
+          <div>行 Row</div>
+        </div>
+
+        <div class="row-card">
+          <div>
+            <h3>行记录三件套</h3>
+            <p>真实字段之外，还藏着事务版本信息。</p>
+          </div>
+          <div class="pill-row">
+            <span>额外信息</span>
+            <span>真实数据</span>
+            <span>trx_id</span>
+            <span>roll_pointer</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="index">
+        <div class="section-title">
+          <p class="eyebrow">04 / Index</p>
+          <h2>为什么 B+ 树是索引主角？</h2>
+        </div>
+
+        <div class="tree">
+          <div class="tree-node root">根节点<br /><small>目录</small></div>
+          <div class="tree-level">
+            <div class="tree-node">中间节点</div>
+            <div class="tree-node">中间节点</div>
+          </div>
+          <div class="tree-level leaves">
+            <div class="tree-node leaf">叶子页 1</div>
+            <div class="tree-node leaf">叶子页 2</div>
+            <div class="tree-node leaf">叶子页 3</div>
+            <div class="tree-node leaf">叶子页 4</div>
+          </div>
+          <p class="tree-note">叶子节点有序相连：范围查询可以顺着扫。</p>
+        </div>
+
+        <div class="grid cards-4">
+          <article class="mini-card"><strong>树高低</strong><span>磁盘 I/O 少</span></article>
+          <article class="mini-card"><strong>叶子有序</strong><span>范围查询强</span></article>
+          <article class="mini-card"><strong>目录轻</strong><span>一个页放更多导航项</span></article>
+          <article class="mini-card"><strong>贴合页模型</strong><span>和 InnoDB 读写方式契合</span></article>
+        </div>
+
+        <div class="table-card">
+          <h3>索引失效小抄</h3>
+          <table>
+            <thead>
+              <tr><th>写法</th><th>为什么危险</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><code>like '%abc'</code></td><td>左边不确定，无法从前缀定位</td></tr>
+              <tr><td><code>age + 1 = 20</code></td><td>索引列被计算加工</td></tr>
+              <tr><td><code>lower(name)</code></td><td>索引列被函数包住</td></tr>
+              <tr><td>联合索引跳过最左列</td><td>不满足最左匹配</td></tr>
+              <tr><td>字符串列用数字比较</td><td>可能触发隐式类型转换</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="section split" id="buffer">
+        <div>
+          <p class="eyebrow">05 / Buffer Pool</p>
+          <h2>Buffer Pool 是 MySQL 的热数据客厅</h2>
+          <p class="lead-sm">磁盘太远，InnoDB 会把常用的数据页、索引页搬进内存。改数据时，先改内存页，标成脏页，之后再刷盘。</p>
+        </div>
+        <div class="decision">
+          <div class="decision-row"><span>SQL 需要数据页</span></div>
+          <div class="decision-diamond">Buffer Pool 有吗？</div>
+          <div class="decision-paths">
+            <div>有 → 直接读内存 ⚡</div>
+            <div>没有 → 从磁盘读页 → 放入 Buffer Pool</div>
+          </div>
+          <div class="decision-row hot">被修改 → 脏页 → 稍后刷盘</div>
+        </div>
+      </section>
+
+      <section class="section" id="logs">
+        <div class="section-title">
+          <p class="eyebrow">06 / Logs</p>
+          <h2>UPDATE 背后的三本账</h2>
+        </div>
+
+        <div class="timeline">
+          <div><span>1</span>写 undo log：留下旧值，方便回滚和 MVCC</div>
+          <div><span>2</span>改 Buffer Pool：先改内存里的页</div>
+          <div><span>3</span>redo prepare：InnoDB 准备提交</div>
+          <div><span>4</span>写 binlog：Server 层记录归档和复制日志</div>
+          <div><span>5</span>redo commit：事务真正闭环</div>
+        </div>
+
+        <div class="grid cards-3">
+          <article class="log-card undo">
+            <h3>undo log</h3>
+            <p>像橡皮擦：回滚、读旧版本。</p>
+          </article>
+          <article class="log-card redo">
+            <h3>redo log</h3>
+            <p>像保险箱：崩溃恢复，不丢已提交事务。</p>
+          </article>
+          <article class="log-card bin">
+            <h3>binlog</h3>
+            <p>像录像带：主从复制、归档恢复。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section split" id="mvcc">
+        <div>
+          <p class="eyebrow">07 / MVCC</p>
+          <h2>事务隔离像“时间相册”</h2>
+          <p class="lead-sm">事务开始读时，Read View 给它拍一张快照。之后别人改了数据，它也可以沿着 undo log 版本链找旧照片。</p>
+        </div>
+
+        <div class="version-chain">
+          <div class="version current">当前版本<br /><small>trx_id=100</small></div>
+          <div class="link">roll_pointer ↓</div>
+          <div class="version">旧版本 1<br /><small>trx_id=90</small></div>
+          <div class="link">↓</div>
+          <div class="version">旧版本 2<br /><small>trx_id=80</small></div>
+          <div class="read-view">📸 Read View：我能看见哪些事务？</div>
+        </div>
+      </section>
+
+      <section class="section" id="locks">
+        <div class="section-title">
+          <p class="eyebrow">08 / Locks</p>
+          <h2>锁：别让两个人同时改同一张卡片</h2>
+        </div>
+
+        <div class="lock-flow">
+          <div class="lock-question">普通快照读？</div>
+          <div class="lock-answer">通常走 MVCC，不加行锁</div>
+          <div class="lock-question">当前读 / 修改？</div>
+          <div class="lock-answer">需要行级锁</div>
+          <div class="lock-question">唯一索引等值命中？</div>
+          <div class="lock-answer">Record Lock 锁具体记录</div>
+          <div class="lock-question">范围 / 非唯一索引？</div>
+          <div class="lock-answer">Next-Key Lock = 记录锁 + 间隙锁</div>
+        </div>
+
+        <div class="analysis-card">
+          <h3>关键分析</h3>
+          <ul>
+            <li>InnoDB 的行锁本质上加在索引上。</li>
+            <li>查询条件没走索引，扫描更多记录，锁范围可能变大。</li>
+            <li>死锁不是数据库坏了，而是事务互相等锁；短事务、固定访问顺序、失败重试是常见解法。</li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="section" id="slow">
+        <div class="section-title">
+          <p class="eyebrow">09 / Debug</p>
+          <h2>慢 SQL 排查地图</h2>
+        </div>
+
+        <div class="debug-board">
+          <button data-tip="字段没有索引，就像图书馆没有目录，只能一页页翻。">字段有索引吗？</button>
+          <button data-tip="函数、计算、左模糊、隐式转换，都可能让 B+ 树认不出原来的顺序。">索引失效了吗？</button>
+          <button data-tip="扫描行数大，说明即使走索引，也可能还不够精准。">扫描行数大吗？</button>
+          <button data-tip="事务不提交，锁会一直占着，后面的人只能排队。">有锁等待吗？</button>
+          <button data-tip="Buffer Pool 命中低、刷脏页频繁、日志刷盘策略激进，都可能拖慢。">I/O 高吗？</button>
+        </div>
+        <p class="debug-tip" id="debugTip">点一个排查项，看看提示。</p>
+      </section>
+
+      <section class="section final">
+        <h2>最后 6 句话</h2>
+        <ol>
+          <li>SQL 先经过 Server 层，再交给 InnoDB。</li>
+          <li>InnoDB 以页为单位读写，Buffer Pool 用来缓存页。</li>
+          <li>B+ 树优势是树高低、少 I/O、范围查询强。</li>
+          <li>MVCC 靠 Read View 和 undo log 版本链。</li>
+          <li>redo log 防崩溃，binlog 做复制和归档。</li>
+          <li>锁要结合索引理解：索引走得好，锁通常更精准。</li>
+        </ol>
+      </section>
+    </main>
+
+    <footer>
+      <a href="#top">回到顶部 ↑</a>
+      <span>Based on CS-Base / MySQL notes</span>
+    </footer>
+
+    <script src="./script.js"></script>
+  </body>
+</html>

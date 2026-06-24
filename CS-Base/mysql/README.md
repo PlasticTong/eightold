@@ -1,6 +1,7 @@
 # 图解 MySQL 介绍
 
-> 快速入门版：[MySQL 速通漫画版：一条 SQL 的奇妙冒险](./mysql_quick_comic.md)
+> 快速入门版：[MySQL 速通漫画版：一条 SQL 的奇妙冒险](./mysql_quick_comic.md)  
+> Web 前端版：[MySQL 速通漫画 Web](./mysql-comic-web/)
 
 《图解 MySQL》目前还在连载更新中，大家不要催啦:joy: ，更新完会第一时间整理 PDF 的。
 
