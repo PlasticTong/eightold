@@ -8,3 +8,7 @@
 - [Go](./Go/)：Go 相关内容。
   - [GPM 调度演示](./Go/)：本仓库编写的 Go GPM 调度模型示例代码。
   - [go-interview](./Go/go-interview/)：拷贝自 [2637309949/go-interview](https://github.com/2637309949/go-interview)，包含 Go 面试与学习资料。
+- [Java](./Java/)：Java 与后端相关学习资料。
+  - [JavaGuide AI](./Java/JavaGuide/docs/ai/)：LLM、Agent、RAG、MCP、AI 系统设计与面试题。
+  - [JavaGuide AI 编程](./Java/JavaGuide/docs/ai-coding/)：Codex、Claude Code、AI IDE 等实践内容。
+  - [JavaGuide 操作系统](./Java/JavaGuide/docs/cs-basics/operating-system/)：进程线程、内存、文件系统、锁、IPC、I/O 多路复用等内容。
