@@ -1,7 +1,3 @@
-# JavaGuide 精选学习站
-
-> 面向后端开发者的 AI 应用、AI 编程与操作系统学习地图。
-
 <div class="hero-panel">
   <div>
     <span class="hero-kicker">LEARN · PRACTICE · REVIEW</span>

@@ -62,6 +62,30 @@
     });
   }
 
+  function setupSidebarGroups() {
+    document.querySelectorAll(".sidebar-nav li").forEach((item) => {
+      const label = item.querySelector(":scope > strong, :scope > p > strong");
+      const nested = item.querySelector(":scope > ul");
+      if (!label || !nested) return;
+
+      item.classList.add("nav-group");
+      if (!item.querySelector(".active")) item.classList.add("is-collapsed");
+      if (label.dataset.toggleReady) return;
+
+      label.dataset.toggleReady = "true";
+      label.setAttribute("role", "button");
+      label.setAttribute("tabindex", "0");
+
+      const toggle = () => item.classList.toggle("is-collapsed");
+      label.addEventListener("click", toggle);
+      label.addEventListener("keydown", (event) => {
+        if (event.key !== "Enter" && event.key !== " ") return;
+        event.preventDefault();
+        toggle();
+      });
+    });
+  }
+
   window.$docsify = {
     name: "JavaGuide 精选",
     nameLink: "#/",
@@ -69,7 +93,7 @@
     homepage: "README.md",
     loadSidebar: true,
     auto2top: true,
-    subMaxLevel: 2,
+    subMaxLevel: 0,
     maxLevel: 3,
     relativePath: false,
     search: {
@@ -86,9 +110,15 @@
     plugins: [
       function studyPlugin(hook, vm) {
         hook.beforeEach(function (markdown) {
-          return markdown
+          const frontMatter = markdown.match(/^---\s*\n([\s\S]*?)\n---\s*\n/);
+          const titleMatch = frontMatter && frontMatter[1].match(/^title:\s*(.+)$/m);
+          const title = titleMatch ? titleMatch[1].trim().replace(/^['"]|['"]$/g, "") : "";
+          const content = markdown
             .replace(/^---\s*\n[\s\S]*?\n---\s*\n/, "")
             .replace(/<!--\s*@include:[\s\S]*?-->/g, "");
+
+          if (title && !/^\s*#\s+/m.test(content)) return `# ${title}\n\n${content}`;
+          return content;
         });
 
         hook.afterEach(function (html, next) {
@@ -101,6 +131,7 @@
         hook.doneEach(function () {
           updateProgressUI(vm);
           externalizeMissingLinks();
+          setupSidebarGroups();
         });
 
         hook.ready(function () {
