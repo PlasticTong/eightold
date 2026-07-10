@@ -1,5 +1,7 @@
 # Java 学习资料
 
+> 在线学习入口：[JavaGuide AI 与操作系统精选学习站](./JavaGuide/)
+
 ## JavaGuide 精选内容
 
 - [AI 应用开发](./JavaGuide/docs/ai/)：LLM、Agent、RAG、MCP、AI 系统设计和面试题。
