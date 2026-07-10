@@ -21,6 +21,12 @@
     <small>GPM 调度 · Go 面试 · 并发与系统知识</small>
     <em>学习 Go →</em>
   </a>
+  <a class="course-card go-lab-card" href="#/go/playground/README.md">
+    <span class="course-icon">▷</span>
+    <strong>Go 在线实验室</strong>
+    <small>浏览器写代码 · 即时运行 · 内置并发示例</small>
+    <em>开始练习 →</em>
+  </a>
   <a class="course-card ai-card" href="#/docs/ai/README.md">
     <span class="course-icon">✦</span>
     <strong>AI 应用开发</strong>

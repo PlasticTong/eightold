@@ -94,6 +94,109 @@
     });
   }
 
+  const GO_EXAMPLES = {
+    hello: `package main
+
+import "fmt"
+
+func main() {
+	msg := "Hello, Go!"
+	fmt.Println(msg)
+}`,
+    channel: `package main
+
+import "fmt"
+
+func main() {
+	ch := make(chan string)
+	go func() {
+		ch <- "Goroutine 已完成工作"
+	}()
+
+	fmt.Println(<-ch)
+}`,
+    slice: `package main
+
+import "fmt"
+
+func main() {
+	nums := []int{1, 2, 3}
+	nums = append(nums, 4)
+	fmt.Printf("nums=%v, len=%d, cap=%d\\n", nums, len(nums), cap(nums))
+}`
+  };
+
+  function setupGoLab() {
+    const lab = document.querySelector("[data-go-lab]");
+    if (!lab || lab.dataset.ready) return;
+    lab.dataset.ready = "true";
+
+    const source = lab.querySelector("#goSource");
+    const output = lab.querySelector("#goOutput");
+    const status = lab.querySelector("#goRunStatus");
+    const run = lab.querySelector("#goRun");
+    const reset = lab.querySelector("#goReset");
+    let selectedExample = "hello";
+
+    source.value = GO_EXAMPLES[selectedExample];
+
+    const selectExample = (name) => {
+      selectedExample = name;
+      source.value = GO_EXAMPLES[name];
+      lab.querySelectorAll(".go-example").forEach((button) => {
+        button.classList.toggle("is-active", button.dataset.goExample === name);
+      });
+      output.textContent = "$ 已载入示例，等待运行";
+      status.textContent = "等待运行";
+    };
+
+    lab.querySelectorAll(".go-example").forEach((button) => {
+      button.addEventListener("click", () => selectExample(button.dataset.goExample));
+    });
+
+    reset.addEventListener("click", () => selectExample(selectedExample));
+
+    const runCode = async () => {
+      const code = source.value.trim();
+      if (!code) {
+        output.textContent = "请输入 Go 代码后再运行。";
+        return;
+      }
+
+      run.disabled = true;
+      status.textContent = "正在请求 Go Playground…";
+      output.textContent = "$ go run main.go\n\n运行中…";
+
+      try {
+        const response = await fetch("https://play.golang.org/compile", {
+          method: "POST",
+          headers: { "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8" },
+          body: new URLSearchParams({ version: "2", body: code })
+        });
+        if (!response.ok) throw new Error(`服务返回 ${response.status}`);
+
+        const result = await response.json();
+        const events = Array.isArray(result.Events) ? result.Events : [];
+        const text = events.map((event) => event.Message || "").join("");
+        output.textContent = result.Errors || text || "程序运行完成，没有输出。";
+        status.textContent = result.Errors ? "运行出错" : "运行完成";
+      } catch (error) {
+        output.textContent = `无法连接 Go Playground：${error.message}\n\n你可以点击上方链接，在官方 Playground 中继续运行。`;
+        status.textContent = "连接失败";
+      } finally {
+        run.disabled = false;
+      }
+    };
+
+    run.addEventListener("click", runCode);
+    source.addEventListener("keydown", (event) => {
+      if ((event.metaKey || event.ctrlKey) && event.key === "Enter") {
+        event.preventDefault();
+        runCode();
+      }
+    });
+  }
+
   window.$docsify = {
     name: "eightold 学习站",
     nameLink: "#/",
@@ -147,6 +250,7 @@
           updateProgressUI(vm);
           externalizeMissingLinks();
           setupSidebarGroups();
+          setupGoLab();
         });
 
         hook.ready(function () {

@@ -9,6 +9,7 @@
   - [Redis 图解](/cs-base/redis/README.md)
 
 - **Go 后端**
+  - [在线代码实验室](/go/playground/README.md)
   - [GPM 调度模型](/go/README.md)
   - [Go 面试资料](/go/interview/README.md)
 

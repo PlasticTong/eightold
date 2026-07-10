@@ -12,6 +12,7 @@
   --accent-soft: #eeebff;
   --cyan: #20b8a6;
   --amber: #f2a93b;
+  --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
   --sidebar-width: 318px;
 }
 
@@ -508,6 +509,10 @@ body {
   background: #10b981;
 }
 
+.go-lab-card::before {
+  background: #00add8;
+}
+
 .course-card:hover {
   transform: translateY(-4px);
   border-color: rgba(103, 87, 232, 0.35);
@@ -557,6 +562,196 @@ body {
   background: #d1fae5;
   color: #047857;
   font-weight: 900;
+}
+
+.go-lab-card .course-icon {
+  color: #075985;
+  background: #cffafe;
+  font-weight: 900;
+}
+
+.go-lab {
+  margin: 26px 0 42px;
+  overflow: hidden;
+  background: #101a2b;
+  border: 1px solid #253653;
+  border-radius: 20px;
+  box-shadow: 0 22px 46px rgba(16, 26, 43, 0.17);
+}
+
+.go-lab__topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 20px 24px;
+  color: #fff;
+  background: linear-gradient(110deg, #075985, #0f766e);
+}
+
+.go-lab__topbar strong,
+.go-lab__eyebrow {
+  display: block;
+}
+
+.go-lab__topbar strong {
+  margin-top: 4px;
+  font-size: 20px;
+}
+
+.go-lab__eyebrow {
+  color: #a5f3fc;
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 0.16em;
+}
+
+.go-lab__topbar a {
+  padding: 9px 12px;
+  color: #ecfeff !important;
+  border: 1px solid rgba(236, 254, 255, 0.45);
+  border-radius: 9px;
+  font-size: 12px;
+  font-weight: 800;
+  text-decoration: none !important;
+  white-space: nowrap;
+}
+
+.go-lab__examples,
+.go-lab__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+  padding: 16px 24px 0;
+}
+
+.go-example,
+.go-reset {
+  padding: 7px 11px;
+  color: #cbd5e1;
+  background: #18253a;
+  border: 1px solid #30415e;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.go-example.is-active {
+  color: #ecfeff;
+  background: #0e7490;
+  border-color: #22d3ee;
+}
+
+.go-lab__label {
+  display: block;
+  margin: 18px 24px 8px;
+  color: #94a3b8;
+  font-family: var(--mono);
+  font-size: 12px;
+}
+
+.go-source,
+.go-output {
+  box-sizing: border-box;
+  width: calc(100% - 48px);
+  margin: 0 24px;
+  color: #dbeafe;
+  background: #0b1220;
+  border: 1px solid #263856;
+  border-radius: 10px;
+  font-family: var(--mono);
+  font-size: 13px;
+  line-height: 1.65;
+}
+
+.go-source {
+  min-height: 255px;
+  padding: 15px;
+  resize: vertical;
+  tab-size: 2;
+}
+
+.go-source:focus {
+  outline: 2px solid #22d3ee;
+  outline-offset: 1px;
+}
+
+.go-lab__actions {
+  align-items: center;
+  padding: 14px 24px 20px;
+}
+
+.go-run {
+  padding: 10px 14px;
+  color: #042f2e;
+  background: #5eead4;
+  border: 0;
+  border-radius: 9px;
+  cursor: pointer;
+  font-weight: 900;
+}
+
+.go-run:hover {
+  background: #99f6e4;
+}
+
+.go-run:disabled {
+  cursor: wait;
+  opacity: 0.65;
+}
+
+.go-run kbd {
+  margin-left: 7px;
+  color: #115e59;
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.go-run-status {
+  color: #94a3b8;
+  font-size: 12px;
+}
+
+.go-output-wrap {
+  padding: 0 0 20px;
+}
+
+.go-output__title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: calc(100% - 48px);
+  margin: 0 24px 8px;
+  color: #94a3b8;
+  font-family: var(--mono);
+  font-size: 12px;
+}
+
+.go-output__dot {
+  width: 8px;
+  height: 8px;
+  background: #34d399;
+  border-radius: 50%;
+  box-shadow: 0 0 0 4px rgba(52, 211, 153, 0.13);
+}
+
+.go-output {
+  min-height: 94px;
+  margin-bottom: 0;
+  padding: 15px;
+  color: #bbf7d0;
+  white-space: pre-wrap;
+}
+
+.go-lab__notice {
+  margin: 0;
+  padding: 14px 24px 17px;
+  color: #94a3b8 !important;
+  background: #0b1220;
+  border-top: 1px solid #1e2d47;
+  font-size: 12px;
+  line-height: 1.65;
 }
 
 .os-card .course-icon {
@@ -698,6 +893,41 @@ body.close .content {
 
   .learning-path small {
     grid-column: 2;
+  }
+
+  .go-lab__topbar {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .go-lab__topbar a {
+    white-space: normal;
+  }
+
+  .go-source,
+  .go-output {
+    width: calc(100% - 32px);
+    margin-right: 16px;
+    margin-left: 16px;
+  }
+
+  .go-lab__label {
+    margin-right: 16px;
+    margin-left: 16px;
+  }
+
+  .go-lab__examples,
+  .go-lab__actions,
+  .go-lab__topbar,
+  .go-lab__notice {
+    padding-right: 16px;
+    padding-left: 16px;
+  }
+
+  .go-output__title {
+    width: calc(100% - 32px);
+    margin-right: 16px;
+    margin-left: 16px;
   }
 }
 

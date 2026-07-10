@@ -16,6 +16,12 @@ P2：本地队列 [G4, G5]      <--> M2 <--> CPU 核心
                          P1/P2 可从彼此的队列偷取 G
 ```
 
+## 在线动手试一试
+
+不想先配置本地 Go 环境？可以打开 [Go 在线实验室](#/go/playground/README.md)，直接在浏览器中运行小程序、验证 Goroutine 与 Channel 的行为。
+
+> 在线实验室使用 Go Playground 沙箱，适合学习与验证；`GOMAXPROCS`、trace、CPU 压测等调度实验仍应在本地运行。
+
 ## 运行示例
 
 本机需要安装 Go 1.22 或更高版本：
