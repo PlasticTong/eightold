@@ -1,6 +1,6 @@
 # Java 学习资料
 
-> 在线学习入口：[JavaGuide AI 与操作系统精选学习站](./JavaGuide/)
+> 在线学习入口：[eightold 学习站](./JavaGuide/)，包含 CS-Base、Go、AI 与操作系统资料。
 
 ## JavaGuide 精选内容
 

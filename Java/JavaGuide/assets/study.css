@@ -461,7 +461,7 @@ body {
 
 .course-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
   gap: 16px;
   margin: 22px 0 46px;
 }
@@ -498,6 +498,14 @@ body {
 
 .os-card::before {
   background: var(--amber);
+}
+
+.cs-card::before {
+  background: #3b82f6;
+}
+
+.go-card::before {
+  background: #10b981;
 }
 
 .course-card:hover {
@@ -538,6 +546,17 @@ body {
 .coding-card .course-icon {
   color: #0e302d;
   background: #9ff3e7;
+}
+
+.cs-card .course-icon {
+  background: #dbeafe;
+  color: #1d4ed8;
+}
+
+.go-card .course-icon {
+  background: #d1fae5;
+  color: #047857;
+  font-weight: 900;
 }
 
 .os-card .course-icon {

@@ -1,5 +1,17 @@
 - [学习首页](/)
 
+- **CS-Base 计算机基础**
+  - [学习导读](/cs-base/cs_learn/README.md)
+  - [操作系统图解](/cs-base/os/README.md)
+  - [计算机网络图解](/cs-base/network/README.md)
+  - [MySQL 漫画速通](/cs-base/mysql/mysql_quick_comic.md)
+  - [MySQL 漫画 Web ↗](https://plastictong.github.io/eightold/CS-Base/mysql/mysql-comic-web/)
+  - [Redis 图解](/cs-base/redis/README.md)
+
+- **Go 后端**
+  - [GPM 调度模型](/go/README.md)
+  - [Go 面试资料](/go/interview/README.md)
+
 - **AI 应用开发**
   - [AI 知识地图](/docs/ai/README.md)
   - **大模型基础**

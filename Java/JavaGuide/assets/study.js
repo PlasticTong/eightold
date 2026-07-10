@@ -19,7 +19,9 @@
   }
 
   function isCourseRoute(route) {
-    return route.startsWith("/docs/");
+    return ["/docs/", "/cs-base/", "/go/", "/os/", "/network/", "/mysql/", "/redis/"].some(
+      (prefix) => route.startsWith(prefix)
+    );
   }
 
   function updateProgressUI(vm) {
@@ -47,6 +49,12 @@
       "#/docs/ai/",
       "#/docs/ai-coding/",
       "#/docs/cs-basics/operating-system/",
+      "#/cs-base/",
+      "#/go/",
+      "#/os/",
+      "#/network/",
+      "#/mysql/",
+      "#/redis/",
       "#/SOURCE.md"
     ];
 
@@ -87,11 +95,11 @@
   }
 
   window.$docsify = {
-    name: "JavaGuide 精选",
+    name: "eightold 学习站",
     nameLink: "#/",
     repo: "https://github.com/PlasticTong/eightold",
     homepage: "README.md",
-    loadSidebar: true,
+    loadSidebar: "_sidebar.md",
     auto2top: true,
     subMaxLevel: 0,
     maxLevel: 3,
@@ -103,6 +111,13 @@
       depth: 4
     },
     alias: {
+      "/cs-base/(.*)": "/../../CS-Base/$1",
+      "/go/interview/(.*)": "/../../Go/go-interview/docs/$1",
+      "/go/(.*)": "/../../Go/$1",
+      "/os/(.*)": "/../../CS-Base/os/$1",
+      "/network/(.*)": "/../../CS-Base/network/$1",
+      "/mysql/(.*)": "/../../CS-Base/mysql/$1",
+      "/redis/(.*)": "/../../CS-Base/redis/$1",
       "/ai/(.*)": "/docs/ai/$1",
       "/ai-coding/(.*)": "/docs/ai-coding/$1",
       "/cs-basics/operating-system/(.*)": "/docs/cs-basics/operating-system/$1"
