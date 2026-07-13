@@ -301,7 +301,7 @@ func main() {
           externalizeMissingLinks();
           setupSidebarGroups();
           requestAnimationFrame(revealActiveSidebarItem);
-          setupArticleToc();
+          requestAnimationFrame(setupArticleToc);
           setupGoLab();
         });
 
