@@ -99,7 +99,13 @@
 - **Go 后端**
   - [在线代码实验室](/go/playground/README.md)
   - [GPM 调度模型](/go/README.md)
-  - [Go 面试资料](/go/interview/README.md)
+  - [原有 Go 面试题库](/go/interview/README.md)
+  - **Go 面试速通**
+    - [学习地图](/go/interview/Go-Interview/README.md)
+    - [高频八股：语言与内存](/go/interview/Go-Interview/01_core_questions.md)
+    - [高频八股：并发与运行时](/go/interview/Go-Interview/02_concurrency_runtime.md)
+    - [后端场景题](/go/interview/Go-Interview/03_backend_system.md)
+    - [手撕题训练板](/go/interview/Go-Interview/04_coding_drills.md)
 
 - **AI 应用开发**
   - [AI 知识地图](/docs/ai/README.md)
