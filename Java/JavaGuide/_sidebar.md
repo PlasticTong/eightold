@@ -3,6 +3,49 @@
 - **CS-Base 计算机基础**
   - [学习导读](/cs-base/cs_learn/README.md)
   - [操作系统图解](/os/README.md)
+  - **操作系统章节导航**
+    - **硬件与 CPU**
+      - [CPU 如何执行程序](/os/1_hardware/how_cpu_run.md)
+      - [磁盘为什么比内存慢](/os/1_hardware/storage.md)
+      - [让 CPU 跑得更快](/os/1_hardware/how_to_make_cpu_run_faster.md)
+      - [CPU 缓存一致性：MESI](/os/1_hardware/cpu_mesi.md)
+      - [CPU 如何执行任务](/os/1_hardware/how_cpu_deal_task.md)
+      - [软中断](/os/1_hardware/soft_interrupt.md)
+      - [0.1 + 0.2 为什么不等于 0.3](/os/1_hardware/float.md)
+    - **操作系统结构**
+      - [Linux 内核 vs Windows 内核](/os/2_os_structure/linux_vs_windows.md)
+    - **内存管理**
+      - [为什么要有虚拟内存](/os/3_memory/vmem.md)
+      - [malloc 如何分配内存](/os/3_memory/malloc.md)
+      - [内存满了会发生什么](/os/3_memory/mem_reclaim.md)
+      - [4GB 机器申请 8GB 内存](/os/3_memory/alloc_mem.md)
+      - [避免预读失效与缓存污染](/os/3_memory/cache_lru.md)
+    - **进程与线程**
+      - [进程、线程基础](/os/4_process/process_base.md)
+      - [进程间通信](/os/4_process/process_commu.md)
+      - [多线程同步](/os/4_process/multithread_sync.md)
+      - [如何避免死锁](/os/4_process/deadlock.md)
+      - [悲观锁与乐观锁](/os/4_process/pessim_and_optimi_lock.md)
+      - [进程最多创建多少线程](/os/4_process/create_thread_max.md)
+      - [线程崩溃与进程](/os/4_process/thread_crash.md)
+    - **调度算法**
+      - [进程、页面与磁盘调度](/os/5_schedule/schedule.md)
+    - **文件系统**
+      - [文件系统全家桶](/os/6_file_system/file_system.md)
+      - [写文件后进程崩溃](/os/6_file_system/pagecache.md)
+    - **设备与 I/O**
+      - [按下键盘 A 后发生什么](/os/7_device/device.md)
+    - **网络系统**
+      - [零拷贝](/os/8_network_system/zero_copy.md)
+      - [I/O 多路复用](/os/8_network_system/selete_poll_epoll.md)
+      - [Reactor 与 Proactor](/os/8_network_system/reactor.md)
+      - [一致性哈希](/os/8_network_system/hash.md)
+    - **Linux 命令**
+      - [查看网络性能指标](/os/9_linux_cmd/linux_network.md)
+      - [从日志分析 PV、UV](/os/9_linux_cmd/pv_uv.md)
+    - **学习路线**
+      - [操作系统怎么学](/os/10_learn/learn_os.md)
+      - [画图经验分享](/os/10_learn/draw.md)
   - [计算机网络图解](/network/README.md)
   - **网络章节导航**
     - **基础篇**
