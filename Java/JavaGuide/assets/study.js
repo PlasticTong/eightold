@@ -77,7 +77,8 @@
       if (!label || !nested) return;
 
       item.classList.add("nav-group");
-      if (!item.querySelector(".active")) item.classList.add("is-collapsed");
+      // Docsify 把当前链接的 active class 放在 li 上；当前章节的所有父级必须保持展开。
+      item.classList.toggle("is-collapsed", !item.querySelector(".active"));
       if (label.dataset.toggleReady) return;
 
       label.dataset.toggleReady = "true";
@@ -92,6 +93,22 @@
         toggle();
       });
     });
+  }
+
+  function revealActiveSidebarItem() {
+    const sidebar = document.querySelector(".sidebar");
+    const active = sidebar && sidebar.querySelector("li.active");
+    if (!sidebar || !active) return;
+
+    const sidebarRect = sidebar.getBoundingClientRect();
+    const activeRect = active.getBoundingClientRect();
+    const topEdge = sidebarRect.top + 72;
+    const bottomEdge = sidebarRect.bottom - 28;
+
+    // 深层章节打开时，把当前条目带到侧栏的可视范围内，不必手动寻找。
+    if (activeRect.top < topEdge || activeRect.bottom > bottomEdge) {
+      sidebar.scrollTop += activeRect.top - sidebarRect.top - sidebar.clientHeight * 0.34;
+    }
   }
 
   const GO_EXAMPLES = {
@@ -250,6 +267,7 @@ func main() {
           updateProgressUI(vm);
           externalizeMissingLinks();
           setupSidebarGroups();
+          requestAnimationFrame(revealActiveSidebarItem);
           setupGoLab();
         });
 
