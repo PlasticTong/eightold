@@ -272,6 +272,75 @@ body {
   color: var(--ink);
 }
 
+/* 每篇文章都带自己的小目录：宽屏固定在右侧，较窄屏放在正文顶部。 */
+.article-toc {
+  position: fixed;
+  z-index: 20;
+  top: 106px;
+  right: 28px;
+  width: 228px;
+  max-height: calc(100vh - 136px);
+  padding: 16px 12px;
+  overflow-y: auto;
+  color: #697386;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid #e6e9f0;
+  border-radius: 16px;
+  box-shadow: 0 14px 35px rgba(34, 44, 68, 0.08);
+  backdrop-filter: blur(12px);
+}
+
+.article-toc > strong {
+  display: block;
+  padding: 0 9px 8px;
+  color: #263a55;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+}
+
+.article-toc nav {
+  display: grid;
+  gap: 2px;
+}
+
+.article-toc__item {
+  display: block;
+  padding: 7px 9px;
+  overflow: hidden;
+  color: #6f7a8a !important;
+  border-radius: 8px;
+  font-size: 12px;
+  line-height: 1.4;
+  text-decoration: none !important;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.article-toc__item:hover {
+  color: #4438b8 !important;
+  background: #f1f0ff;
+}
+
+.article-toc__item--h3 {
+  padding-left: 20px;
+  color: #8992a0 !important;
+}
+
+@media (min-width: 1500px) {
+  .content {
+    right: 276px !important;
+  }
+}
+
+@media (max-width: 1499px) {
+  .article-toc {
+    position: static;
+    width: auto;
+    max-height: 250px;
+    margin: 28px 48px -42px;
+  }
+}
+
 .markdown-section h1,
 .markdown-section h2,
 .markdown-section h3,
@@ -879,6 +948,13 @@ body.close .content {
 
   .markdown-section {
     padding: 72px 22px 60px !important;
+  }
+
+  .article-toc {
+    position: static;
+    width: auto;
+    max-height: 250px;
+    margin: 26px 22px -42px;
   }
 
   .study-toolbar {

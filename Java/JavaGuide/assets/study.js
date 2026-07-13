@@ -111,6 +111,39 @@
     }
   }
 
+  function setupArticleToc() {
+    document.querySelectorAll(".article-toc").forEach((toc) => toc.remove());
+
+    const route = location.hash.slice(1).split("?")[0] || "/";
+    if (!isCourseRoute(route)) return;
+
+    const article = document.querySelector(".markdown-section");
+    if (!article) return;
+
+    const headings = [...article.querySelectorAll("h2, h3")].filter((heading) => heading.id);
+    if (headings.length < 2) return;
+
+    const toc = document.createElement("aside");
+    toc.className = "article-toc";
+    toc.setAttribute("aria-label", "本章导航");
+
+    const title = document.createElement("strong");
+    title.textContent = "本章导航";
+    toc.appendChild(title);
+
+    const list = document.createElement("nav");
+    const baseRoute = location.hash.split("?")[0];
+    headings.forEach((heading) => {
+      const link = document.createElement("a");
+      link.href = `${baseRoute}?id=${encodeURIComponent(heading.id)}`;
+      link.textContent = heading.textContent.trim();
+      link.className = `article-toc__item article-toc__item--${heading.tagName.toLowerCase()}`;
+      list.appendChild(link);
+    });
+    toc.appendChild(list);
+    article.parentElement.insertBefore(toc, article);
+  }
+
   const GO_EXAMPLES = {
     hello: `package main
 
@@ -268,6 +301,7 @@ func main() {
           externalizeMissingLinks();
           setupSidebarGroups();
           requestAnimationFrame(revealActiveSidebarItem);
+          setupArticleToc();
           setupGoLab();
         });
 
