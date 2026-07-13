@@ -106,6 +106,12 @@
     - [高频八股：并发与运行时](/go/interview/Go-Interview/02_concurrency_runtime.md)
     - [后端场景题](/go/interview/Go-Interview/03_backend_system.md)
     - [手撕题训练板](/go/interview/Go-Interview/04_coding_drills.md)
+  - **游戏服务器开发**
+    - [学习地图](/go/interview/Game-Server/README.md)
+    - [架构与服务拆分](/go/interview/Game-Server/01_architecture.md)
+    - [网络同步与反作弊](/go/interview/Game-Server/02_realtime_sync.md)
+    - [Go 实战路线](/go/interview/Game-Server/03_go_practice.md)
+    - [面试题与排障](/go/interview/Game-Server/04_interview.md)
 
 - **AI 应用开发**
   - [AI 知识地图](/docs/ai/README.md)
