@@ -6,7 +6,7 @@
   </div>
 </div>
 
-## 五条学习路线
+## 七条学习路线
 
 <div class="course-grid">
   <a class="course-card cs-card" href="#/cs-base/os/README.md">
@@ -26,6 +26,12 @@
     <strong>Go 在线实验室</strong>
     <small>浏览器写代码 · 即时运行 · 内置并发示例</small>
     <em>开始练习 →</em>
+  </a>
+  <a class="course-card algorithm-card" href="#/go/interview/Algorithm/Hot200/README.md">
+    <span class="course-icon">∑</span>
+    <strong>算法 Hot 200</strong>
+    <small>分类题单 · Go 模板 · 三轮复习 · 面试表达</small>
+    <em>开始刷题 →</em>
   </a>
   <a class="course-card ai-card" href="#/docs/ai/README.md">
     <span class="course-icon">✦</span>
@@ -52,9 +58,10 @@
 <div class="learning-path">
   <div><b>01</b><span>CS-Base 基础</span><small>先理解操作系统、网络与数据库为什么这样工作</small></div>
   <div><b>02</b><span>Go 后端</span><small>结合 GPM 调度与 Go 高频面试题建立工程感</small></div>
-  <div><b>03</b><span>大模型基础</span><small>理解 Token、上下文和模型调用</small></div>
-  <div><b>04</b><span>Agent 与 RAG</span><small>把模型接入工具和知识库</small></div>
-  <div><b>05</b><span>系统设计与实践</span><small>走向可上线、可观测、可治理</small></div>
+  <div><b>03</b><span>算法 Hot 200</span><small>按模型训练，再通过乱序复习形成独立解题能力</small></div>
+  <div><b>04</b><span>大模型基础</span><small>理解 Token、上下文和模型调用</small></div>
+  <div><b>05</b><span>Agent 与 RAG</span><small>把模型接入工具和知识库</small></div>
+  <div><b>06</b><span>系统设计与实践</span><small>走向可上线、可观测、可治理</small></div>
 </div>
 
 ## 使用方法

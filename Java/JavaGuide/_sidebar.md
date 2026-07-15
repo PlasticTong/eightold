@@ -113,6 +113,20 @@
     - [Go 实战路线](/go/interview/Game-Server/03_go_practice.md)
     - [面试题与排障](/go/interview/Game-Server/04_interview.md)
 
+- **算法与数据结构**
+  - **LeetCode Hot 200**
+    - [学习地图](/go/interview/Algorithm/Hot200/README.md)
+    - [数组、哈希与矩阵](/go/interview/Algorithm/Hot200/01_array_hash.md)
+    - [双指针与滑动窗口](/go/interview/Algorithm/Hot200/02_two_pointer_window.md)
+    - [链表](/go/interview/Algorithm/Hot200/03_linked_list.md)
+    - [栈、队列与堆](/go/interview/Algorithm/Hot200/04_stack_queue_heap.md)
+    - [二叉树与 BST](/go/interview/Algorithm/Hot200/05_tree.md)
+    - [图、搜索与并查集](/go/interview/Algorithm/Hot200/06_graph.md)
+    - [二分、排序与贪心](/go/interview/Algorithm/Hot200/07_binary_sort_greedy.md)
+    - [回溯](/go/interview/Algorithm/Hot200/08_backtracking.md)
+    - [动态规划](/go/interview/Algorithm/Hot200/09_dynamic_programming.md)
+    - [Go 算法模板](/go/interview/Algorithm/Hot200/10_go_templates.md)
+
 - **AI 应用开发**
   - [AI 知识地图](/docs/ai/README.md)
   - **大模型基础**

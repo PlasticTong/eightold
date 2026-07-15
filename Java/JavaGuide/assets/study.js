@@ -259,7 +259,7 @@ func main() {
     relativePath: false,
     search: {
       paths: "auto",
-      placeholder: "搜索 AI、Agent、RAG、操作系统…",
+      placeholder: "搜索 Go、算法、AI、操作系统…",
       noData: "没有找到相关内容",
       depth: 4
     },
