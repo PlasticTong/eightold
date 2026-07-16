@@ -1,0 +1,2 @@
+ANON_HMAC_KEY=generate-a-long-random-secret-for-local-development
+ADMIN_EMAILS=replace-with-your-cloudflare-login@example.com

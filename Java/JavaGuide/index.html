@@ -4,9 +4,11 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="eightold 后端与 AI 学习站" />
+    <!-- 部署 analytics/ingest Worker 后，将 content 改为它的公开地址。留空时不会采集。 -->
+    <meta name="analytics-endpoint" content="" />
     <title>eightold 学习站</title>
     <link rel="stylesheet" href="./assets/vendor/vue.css" />
-    <link rel="stylesheet" href="./assets/study.css?v=20260715-1" />
+    <link rel="stylesheet" href="./assets/study.css?v=20260716-1" />
   </head>
   <body>
     <a class="site-brand" href="#/" aria-label="返回学习首页">
@@ -20,7 +22,8 @@
     </div>
     <div id="app">正在打开学习站…</div>
 
-    <script src="./assets/study.js?v=20260715-1"></script>
+    <script src="./assets/analytics.js?v=20260716-1"></script>
+    <script src="./assets/study.js?v=20260716-1"></script>
     <script src="./assets/vendor/docsify.min.js"></script>
     <script src="./assets/vendor/search.min.js"></script>
     <script src="./assets/vendor/zoom-image.min.js"></script>

@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex,nofollow" />
+    <title>eightold Analytics</title>
+    <link rel="stylesheet" href="/admin.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="https://plastictong.github.io/eightold/Java/JavaGuide/">
+        <span>EO</span>
+        <div><strong>eightold Analytics</strong><small>匿名访问分析后台</small></div>
+      </a>
+      <div class="toolbar">
+        <label>统计范围
+          <select id="days">
+            <option value="7">最近 7 天</option>
+            <option value="30" selected>最近 30 天</option>
+            <option value="90">最近 90 天</option>
+          </select>
+        </label>
+        <button id="refresh" type="button">刷新数据</button>
+      </div>
+    </header>
+
+    <main class="dashboard">
+      <section class="intro">
+        <div>
+          <p class="eyebrow">PRIVACY-FIRST ANALYTICS</p>
+          <h1>谁来学习过？</h1>
+          <p>这里展示匿名访客、页面趋势与近似地区。匿名 ID 不是姓名，也不能证明现实身份。</p>
+        </div>
+        <div id="status" class="status" role="status">正在加载数据…</div>
+      </section>
+
+      <section class="metric-grid" aria-label="核心指标">
+        <article class="metric"><span>页面浏览</span><strong id="metricViews">—</strong><small>PV</small></article>
+        <article class="metric"><span>匿名访客</span><strong id="metricVisitors">—</strong><small>估算 UV</small></article>
+        <article class="metric"><span>学习会话</span><strong id="metricSessions">—</strong><small>Sessions</small></article>
+        <article class="metric accent"><span>今日访问</span><strong id="metricToday">—</strong><small>Asia/Shanghai</small></article>
+      </section>
+
+      <section class="panel wide">
+        <div class="panel-heading"><div><span>访问趋势</span><h2>每日 PV / UV</h2></div><small><i class="legend pv"></i>PV <i class="legend uv"></i>UV</small></div>
+        <div id="dailyChart" class="daily-chart" aria-label="每日访问趋势"></div>
+      </section>
+
+      <section class="split-grid">
+        <article class="panel">
+          <div class="panel-heading"><div><span>内容表现</span><h2>热门页面</h2></div></div>
+          <div id="topPages" class="rank-list"></div>
+        </article>
+        <article class="panel">
+          <div class="panel-heading"><div><span>流量来源</span><h2>来源网站</h2></div></div>
+          <div id="referrers" class="rank-list"></div>
+        </article>
+        <article class="panel">
+          <div class="panel-heading"><div><span>近似位置</span><h2>国家 / 地区</h2></div></div>
+          <div id="countries" class="rank-list"></div>
+        </article>
+      </section>
+
+      <section class="panel wide">
+        <div class="panel-heading">
+          <div><span>WHO VISITED</span><h2>最近匿名访客</h2></div>
+          <small>所选范围内最多 100 位</small>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>匿名 ID</th><th>范围内首次</th><th>范围内最后</th><th>PV</th><th>会话</th><th>近似地区</th><th>最新设备</th></tr></thead>
+            <tbody id="visitorRows"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="panel wide">
+        <div class="panel-heading">
+          <div><span>LIVE FEED</span><h2>最近访问记录</h2></div>
+          <small>所选范围内最多 100 条</small>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>时间</th><th>匿名 ID</th><th>页面</th><th>来源</th><th>地区</th><th>客户端</th></tr></thead>
+            <tbody id="eventRows"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <footer>不保存原始 IP · 原始事件默认保留 90 天 · 管理入口由 Cloudflare Access 保护</footer>
+    </main>
+
+    <script src="/admin.js" defer></script>
+  </body>
+</html>

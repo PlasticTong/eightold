@@ -649,6 +649,77 @@ body {
   font-weight: 900;
 }
 
+.analytics-banner {
+  box-sizing: border-box;
+  position: fixed;
+  z-index: 90;
+  right: 24px;
+  bottom: 24px;
+  width: min(430px, calc(100vw - 32px));
+  padding: 18px;
+  color: var(--ink);
+  background: color-mix(in srgb, var(--surface) 94%, transparent);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  box-shadow: 0 18px 55px rgba(18, 25, 40, 0.18);
+  backdrop-filter: blur(14px);
+}
+
+.analytics-banner strong,
+.analytics-banner p {
+  display: block;
+  margin: 0;
+}
+
+.analytics-banner p {
+  margin-top: 8px;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.65;
+}
+
+.analytics-actions,
+.privacy-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.analytics-actions button,
+.privacy-actions button {
+  padding: 9px 14px;
+  color: var(--ink);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.analytics-actions button:first-child,
+.privacy-actions button:first-child {
+  color: #fff;
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+.analytics-status {
+  display: inline-block;
+  margin-top: 12px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+@media screen and (max-width: 640px) {
+  .analytics-banner {
+    right: 16px;
+    left: 16px;
+    width: auto;
+    bottom: 16px;
+  }
+}
+
 .go-lab {
   margin: 26px 0 42px;
   overflow: hidden;

@@ -1,0 +1,12 @@
+{
+  "name": "eightold-analytics",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test test/*.test.js",
+    "dev:ingest": "npx wrangler@latest dev --config wrangler.ingest.jsonc",
+    "dev:admin": "npx wrangler@latest dev --config wrangler.admin.jsonc",
+    "deploy:ingest": "npx wrangler@latest deploy --config wrangler.ingest.jsonc",
+    "deploy:admin": "npx wrangler@latest deploy --config wrangler.admin.jsonc"
+  }
+}

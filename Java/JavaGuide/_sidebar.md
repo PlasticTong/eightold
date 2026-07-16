@@ -206,4 +206,5 @@
   - [Linux 基础](/docs/cs-basics/operating-system/linux-intro.md)
   - [Shell 编程](/docs/cs-basics/operating-system/shell-intro.md)
 
+- [隐私与访问统计](/PRIVACY.md)
 - [来源与许可证](/SOURCE.md)

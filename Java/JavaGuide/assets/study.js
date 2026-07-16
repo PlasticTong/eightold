@@ -303,6 +303,13 @@ func main() {
           requestAnimationFrame(revealActiveSidebarItem);
           requestAnimationFrame(setupArticleToc);
           setupGoLab();
+          if (window.eightoldAnalytics) {
+            const heading = document.querySelector(".markdown-section h1");
+            window.eightoldAnalytics.trackPageView(
+              currentRoute(vm),
+              heading ? heading.textContent.trim() : document.title
+            );
+          }
         });
 
         hook.ready(function () {

@@ -71,4 +71,6 @@
 3. 每篇文章底部点击“标记为已学”，进度保存在当前浏览器。
 4. 图片可以点击放大；部分图片来自 JavaGuide 在线 OSS，需要联网显示。
 
+[隐私与匿名访问统计说明](/PRIVACY.md)
+
 > 本站汇总自 [Snailclimb/JavaGuide](https://github.com/Snailclimb/JavaGuide)、CS-Base、go-interview 和本仓库示例。JavaGuide 的来源版本和许可证见 [SOURCE.md](./SOURCE.md)。
