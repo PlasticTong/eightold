@@ -32,28 +32,45 @@ type Config struct {
 
 // Trade is one simulated fill.
 type Trade struct {
-	Date  time.Time
-	Side  string
-	Price float64
-	Qty   float64
-	Fee   float64
+	Date        time.Time `json:"date"`
+	Side        string    `json:"side"`
+	Price       float64   `json:"price"`
+	Qty         float64   `json:"quantity"`
+	Fee         float64   `json:"fee"`
+	GrossValue  float64   `json:"gross_value"`
+	RealizedPnL float64   `json:"realized_pnl"`
+	Reason      string    `json:"reason"`
+	Closed      bool      `json:"closed_position"`
 }
 
 // EquityPoint records marked-to-market account equity at a daily close.
 type EquityPoint struct {
-	Date   time.Time
-	Equity float64
+	Date     time.Time `json:"date"`
+	Equity   float64   `json:"equity"`
+	Cash     float64   `json:"cash"`
+	Position float64   `json:"position"`
+	Drawdown float64   `json:"drawdown"`
 }
 
 // Result contains the key teaching metrics and the simulated fills.
 type Result struct {
-	InitialCash float64
-	FinalEquity float64
-	TotalReturn float64
-	MaxDrawdown float64
-	Sharpe      float64
-	Trades      []Trade
-	Equity      []EquityPoint
+	Strategy        string        `json:"strategy"`
+	InitialCash     float64       `json:"initial_cash"`
+	FinalEquity     float64       `json:"final_equity"`
+	TotalReturn     float64       `json:"total_return"`
+	BenchmarkReturn float64       `json:"benchmark_return"`
+	CAGR            float64       `json:"cagr"`
+	MaxDrawdown     float64       `json:"max_drawdown"`
+	Volatility      float64       `json:"annualized_volatility"`
+	Sharpe          float64       `json:"sharpe"`
+	Calmar          float64       `json:"calmar"`
+	WinRate         float64       `json:"win_rate"`
+	ClosedTrades    int           `json:"closed_trades"`
+	TotalFees       float64       `json:"total_fees"`
+	Turnover        float64       `json:"turnover"`
+	Halted          bool          `json:"risk_halted"`
+	Trades          []Trade       `json:"trades,omitempty"`
+	Equity          []EquityPoint `json:"equity,omitempty"`
 }
 
 // LoadCSV reads date,open,high,low,close,volume columns.
@@ -194,77 +211,16 @@ func RunSMACross(bars []Bar, config Config) (Result, error) {
 	if err := validateConfig(bars, config); err != nil {
 		return Result{}, err
 	}
-
-	closes := make([]float64, len(bars))
-	for index, bar := range bars {
-		closes[index] = bar.Close
+	strategy := &SMACrossStrategy{
+		FastPeriod: config.FastPeriod,
+		SlowPeriod: config.SlowPeriod,
 	}
-	fast, _ := SMA(closes, config.FastPeriod)
-	slow, _ := SMA(closes, config.SlowPeriod)
-
-	cash := config.InitialCash
-	var quantity float64
-	var pending string
-	trades := make([]Trade, 0)
-	equity := make([]EquityPoint, 0, len(bars))
-
-	for index, bar := range bars {
-		switch pending {
-		case "BUY":
-			if quantity == 0 {
-				price := bar.Open * (1 + config.Slippage)
-				quantity = cash / (price * (1 + config.Commission))
-				gross := quantity * price
-				fee := gross * config.Commission
-				cash -= gross + fee
-				if math.Abs(cash) < 1e-9 {
-					cash = 0
-				}
-				trades = append(trades, Trade{
-					Date: bar.Date, Side: "BUY", Price: price, Qty: quantity, Fee: fee,
-				})
-			}
-		case "SELL":
-			if quantity > 0 {
-				price := bar.Open * (1 - config.Slippage)
-				gross := quantity * price
-				fee := gross * config.Commission
-				cash += gross - fee
-				trades = append(trades, Trade{
-					Date: bar.Date, Side: "SELL", Price: price, Qty: quantity, Fee: fee,
-				})
-				quantity = 0
-			}
-		}
-		pending = ""
-
-		currentEquity := cash + quantity*bar.Close
-		equity = append(equity, EquityPoint{Date: bar.Date, Equity: currentEquity})
-
-		if index == 0 || math.IsNaN(fast[index]) || math.IsNaN(slow[index]) ||
-			math.IsNaN(fast[index-1]) || math.IsNaN(slow[index-1]) {
-			continue
-		}
-
-		crossedUp := fast[index-1] <= slow[index-1] && fast[index] > slow[index]
-		crossedDown := fast[index-1] >= slow[index-1] && fast[index] < slow[index]
-		if crossedUp && quantity == 0 {
-			pending = "BUY"
-		} else if crossedDown && quantity > 0 {
-			pending = "SELL"
-		}
-	}
-
-	finalEquity := equity[len(equity)-1].Equity
-	return Result{
-		InitialCash: config.InitialCash,
-		FinalEquity: finalEquity,
-		TotalReturn: finalEquity/config.InitialCash - 1,
-		MaxDrawdown: maxDrawdown(equity),
-		Sharpe:      annualizedSharpe(equity),
-		Trades:      trades,
-		Equity:      equity,
-	}, nil
+	return Run(bars, strategy, EngineConfig{
+		InitialCash:    config.InitialCash,
+		CommissionRate: config.Commission,
+		SlippageRate:   config.Slippage,
+		MaxPositionPct: 1,
+	})
 }
 
 func validateConfig(bars []Bar, config Config) error {

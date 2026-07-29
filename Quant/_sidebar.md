@@ -7,6 +7,7 @@
   - [经典策略](/quant/docs/03-strategies.md)
   - [风险控制](/quant/docs/04-risk.md)
   - [项目与数据源](/quant/docs/05-resources.md)
+  - [系统架构](/quant/docs/06-system.md)
   - [Go 双均线回测](/quant/examples/sma-cross/README.md)
 
 - **边界与来源**

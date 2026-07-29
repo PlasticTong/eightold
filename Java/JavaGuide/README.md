@@ -36,7 +36,7 @@
   <a class="course-card quant-card" href="#/quant/README.md">
     <span class="course-icon">Q</span>
     <strong>量化交易实验室</strong>
-    <small>回测 · 策略 · 风控 · 原创 Go 示例</small>
+    <small>策略引擎 · 撮合 · 风控 · 绩效报告</small>
     <em>开始研究 →</em>
   </a>
   <a class="course-card ai-card" href="#/docs/ai/README.md">
