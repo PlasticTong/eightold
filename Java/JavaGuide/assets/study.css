@@ -586,6 +586,10 @@ body {
   background: #8b5cf6;
 }
 
+.quant-card::before {
+  background: #f97316;
+}
+
 .course-card:hover {
   transform: translateY(-4px);
   border-color: rgba(103, 87, 232, 0.35);
@@ -646,6 +650,12 @@ body {
 .algorithm-card .course-icon {
   color: #5b21b6;
   background: #ede9fe;
+  font-weight: 900;
+}
+
+.quant-card .course-icon {
+  color: #9a3412;
+  background: #ffedd5;
   font-weight: 900;
 }
 

@@ -8,6 +8,7 @@
 - [Go](./Go/)：Go 相关内容。
   - [GPM 调度演示](./Go/)：本仓库编写的 Go GPM 调度模型示例代码。
   - [go-interview](./Go/go-interview/)：拷贝自 [2637309949/go-interview](https://github.com/2637309949/go-interview)，包含 Go 面试与学习资料。
+- [Quant](./Quant/)：独立的量化交易学习模块，包含原创 Go 回测代码、策略、风控和开源项目索引。
 - [Java](./Java/)：Java 与后端相关学习资料。
   - [eightold 学习站](./Java/JavaGuide/)：通过网页目录、搜索和阅读进度学习 CS-Base、Go、AI 与操作系统。
   - [JavaGuide AI](./Java/JavaGuide/docs/ai/)：LLM、Agent、RAG、MCP、AI 系统设计与面试题。

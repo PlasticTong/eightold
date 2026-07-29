@@ -1,12 +1,12 @@
 <div class="hero-panel">
   <div>
     <span class="hero-kicker">LEARN · PRACTICE · REVIEW</span>
-    <h2>从计算机基础，到 Go 与 AI 工程</h2>
-    <p>把 CS-Base、Go 面试资料和 JavaGuide 精选内容放进同一条学习主线。先选一条路线，读完一篇就标记进度。</p>
+    <h2>从计算机基础，到 Go、量化与 AI 工程</h2>
+    <p>把 CS-Base、Go、量化交易和 JavaGuide 精选内容放进同一学习站，各模块保持独立。先选一条路线，读完一篇就标记进度。</p>
   </div>
 </div>
 
-## 七条学习路线
+## 八条学习路线
 
 <div class="course-grid">
   <a class="course-card cs-card" href="#/cs-base/os/README.md">
@@ -32,6 +32,12 @@
     <strong>算法 Hot 200</strong>
     <small>分类题单 · Go 模板 · 三轮复习 · 面试表达</small>
     <em>开始刷题 →</em>
+  </a>
+  <a class="course-card quant-card" href="#/quant/README.md">
+    <span class="course-icon">Q</span>
+    <strong>量化交易实验室</strong>
+    <small>回测 · 策略 · 风控 · 原创 Go 示例</small>
+    <em>开始研究 →</em>
   </a>
   <a class="course-card ai-card" href="#/docs/ai/README.md">
     <span class="course-icon">✦</span>
@@ -59,9 +65,10 @@
   <div><b>01</b><span>CS-Base 基础</span><small>先理解操作系统、网络与数据库为什么这样工作</small></div>
   <div><b>02</b><span>Go 后端</span><small>结合 GPM 调度与 Go 高频面试题建立工程感</small></div>
   <div><b>03</b><span>算法 Hot 200</span><small>按模型训练，再通过乱序复习形成独立解题能力</small></div>
-  <div><b>04</b><span>大模型基础</span><small>理解 Token、上下文和模型调用</small></div>
-  <div><b>05</b><span>Agent 与 RAG</span><small>把模型接入工具和知识库</small></div>
-  <div><b>06</b><span>系统设计与实践</span><small>走向可上线、可观测、可治理</small></div>
+  <div><b>04</b><span>量化实验</span><small>独立学习数据、回测、策略和风险控制</small></div>
+  <div><b>05</b><span>大模型基础</span><small>理解 Token、上下文和模型调用</small></div>
+  <div><b>06</b><span>Agent 与 RAG</span><small>把模型接入工具和知识库</small></div>
+  <div><b>07</b><span>系统设计与实践</span><small>走向可上线、可观测、可治理</small></div>
 </div>
 
 ## 使用方法

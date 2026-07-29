@@ -19,7 +19,7 @@
   }
 
   function isCourseRoute(route) {
-    return ["/docs/", "/cs-base/", "/go/", "/os/", "/network/", "/mysql/", "/redis/"].some(
+    return ["/docs/", "/cs-base/", "/go/", "/quant/", "/os/", "/network/", "/mysql/", "/redis/"].some(
       (prefix) => route.startsWith(prefix)
     );
   }
@@ -51,6 +51,7 @@
       "#/docs/cs-basics/operating-system/",
       "#/cs-base/",
       "#/go/",
+      "#/quant/",
       "#/os/",
       "#/network/",
       "#/mysql/",
@@ -259,7 +260,7 @@ func main() {
     relativePath: false,
     search: {
       paths: "auto",
-      placeholder: "搜索 Go、算法、AI、操作系统…",
+      placeholder: "搜索 Go、算法、量化、AI、操作系统…",
       noData: "没有找到相关内容",
       depth: 4
     },
@@ -267,6 +268,7 @@ func main() {
       "/cs-base/(.*)": "/../../CS-Base/$1",
       "/go/interview/(.*)": "/../../Go/go-interview/docs/$1",
       "/go/(.*)": "/../../Go/$1",
+      "/quant/(.*)": "/../../Quant/$1",
       "/os/(.*)": "/../../CS-Base/os/$1",
       "/network/(.*)": "/../../CS-Base/network/$1",
       "/mysql/(.*)": "/../../CS-Base/mysql/$1",

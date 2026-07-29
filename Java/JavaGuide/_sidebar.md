@@ -127,6 +127,9 @@
     - [动态规划](/go/interview/Algorithm/Hot200/09_dynamic_programming.md)
     - [Go 算法模板](/go/interview/Algorithm/Hot200/10_go_templates.md)
 
+- **量化交易实验室**
+  - [独立模块首页](/quant/README.md)
+
 - **AI 应用开发**
   - [AI 知识地图](/docs/ai/README.md)
   - **大模型基础**
